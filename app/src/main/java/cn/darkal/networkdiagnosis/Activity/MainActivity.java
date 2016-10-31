@@ -70,8 +70,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.darkal.networkdiagnosis.Adapter.FilterAdpter;
 import cn.darkal.networkdiagnosis.Bean.PageBean;
-import cn.darkal.networkdiagnosis.Fragment.BaseFragment;
 import cn.darkal.networkdiagnosis.Fragment.BackHandledInterface;
+import cn.darkal.networkdiagnosis.Fragment.BaseFragment;
 import cn.darkal.networkdiagnosis.Fragment.NetworkFragment;
 import cn.darkal.networkdiagnosis.Fragment.PreviewFragment;
 import cn.darkal.networkdiagnosis.Fragment.WebViewFragment;
@@ -220,6 +220,9 @@ public class MainActivity extends AppCompatActivity implements BackHandledInterf
 //                return true;
 //            }
 //        });
+
+//        Intent intent = new Intent(this,MoniorService.class);
+//        startService(intent);
     }
 
     public void createPage() {
@@ -419,12 +422,12 @@ public class MainActivity extends AppCompatActivity implements BackHandledInterf
             }
             if (!isAdded) {
                 if (!to.isAdded()) { // 先判断是否被add过
-                    transaction.add(R.id.fl_contain, to, to.getClass().getName()).commitNow();
+                    transaction.add(R.id.fl_contain, to, to.getClass().getName()).commitAllowingStateLoss();
                 } else {
-                    transaction.show(to).commitNow(); // 隐藏当前的fragment，显示下一个
+                    transaction.show(to).commitAllowingStateLoss(); // 隐藏当前的fragment，显示下一个
                 }
             } else {
-                transaction.commitNow();
+                transaction.commitAllowingStateLoss();
             }
             if (getSupportFragmentManager().findFragmentByTag(to.getClass().getName()) != null) {
                 getSupportFragmentManager().findFragmentByTag(to.getClass().getName()).setUserVisibleHint(true);

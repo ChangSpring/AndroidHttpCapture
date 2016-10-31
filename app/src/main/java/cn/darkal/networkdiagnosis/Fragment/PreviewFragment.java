@@ -62,6 +62,7 @@ public class PreviewFragment extends BaseFragment {
         if(SysApplication.isInitProxy) {
             harLog = ((SysApplication) getActivity().getApplication()).proxy.getHar().getLog();
             harEntryList.addAll(harLog.getEntries());
+            ((SysApplication)getActivity().getApplication()).setHarEntryList(harEntryList);
         }
         recyclerView.addItemDecoration(new RecycleViewDivider(getActivity(), RecycleViewDivider.VERTICAL_LIST));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -183,6 +184,7 @@ public class PreviewFragment extends BaseFragment {
                         }
                         //加载复制的数据，即为最初的数据
                         harEntryList.addAll(harLog.getEntries());
+                        ((SysApplication)getActivity().getApplication()).setHarEntryList(harEntryList);
                         previewAdapter.notifyDataSetChanged();
                     }
                 }

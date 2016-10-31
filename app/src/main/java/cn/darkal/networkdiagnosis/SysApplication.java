@@ -13,6 +13,7 @@ import com.tencent.bugly.crashreport.CrashReport;
 import net.gotev.uploadservice.UploadService;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;
+import net.lightbody.bmp.core.har.HarEntry;
 import net.lightbody.bmp.proxy.CaptureType;
 import net.lightbody.bmp.proxy.dns.AdvancedHostResolver;
 
@@ -21,7 +22,9 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
@@ -32,6 +35,10 @@ public class SysApplication extends MultiDexApplication {
     public static Boolean isInitProxy = false;
     public static int proxyPort = 8888;
     public BrowserMobProxy proxy;
+
+
+
+    public List<HarEntry> mHarEntryList = new ArrayList<>();
 
     @Override
     public void onCreate() {
@@ -118,5 +125,14 @@ public class SysApplication extends MultiDexApplication {
         }
 
         isInitProxy = true;
+    }
+
+    public List<HarEntry> getHarEntryList() {
+        return mHarEntryList;
+    }
+
+    public void setHarEntryList(List<HarEntry> harEntryList) {
+        harEntryList.clear();
+        mHarEntryList = harEntryList;
     }
 }
